@@ -10,7 +10,22 @@ class App extends Component {
         this.state = {lista : []};
     }
 
+/*    // Chamada pelo React antes dele invocar o render pela primeira vez
     componentWillMount() {
+        console.log("willMount");
+        $.ajax({
+                url: "http://cdc-react.herokuapp.com/api/autores",
+                dataType: 'json',
+                success: function (resposta) {
+                    console.log("chegou a resposta");
+                    this.setState({lista: resposta});
+                }.bind(this)
+            }
+        );
+    }*/
+
+    // Chamada depois do primeiro render
+    componentDidMount() {
         console.log("willMount");
         $.ajax({
                 url: "http://cdc-react.herokuapp.com/api/autores",
@@ -38,8 +53,6 @@ class App extends Component {
                             <li className="pure-menu-item"><a href="#" className="pure-menu-link">Home</a></li>
                             <li className="pure-menu-item"><a href="#" className="pure-menu-link">Autor</a></li>
                             <li className="pure-menu-item"><a href="#" className="pure-menu-link">Livro</a></li>
-
-
                         </ul>
                     </div>
                 </div>
@@ -81,7 +94,7 @@ class App extends Component {
                                 {
                                     this.state.lista.map(function (autor) {
                                         return (
-                                            <tr>
+                                            <tr key={autor.id}>
                                                 <td>{autor.nome}</td>
                                                 <td>{autor.email}</td>
                                             </tr>
