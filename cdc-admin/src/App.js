@@ -8,25 +8,26 @@ class App extends Component {
     constructor() {
         super();
         this.state = {lista : [], nome: '', email: '', senha: ''};
+        // Bindiando com o this do React
         this.enviaForm = this.enviaForm.bind(this);
         this.setNome = this.setNome.bind(this);
         this.setEmail = this.setEmail.bind(this);
         this.setSenha = this.setSenha.bind(this);
     }
 
-/*    // Chamada pelo React antes dele invocar o render pela primeira vez
-    componentWillMount() {
-        console.log("willMount");
-        $.ajax({
-                url: "http://cdc-react.herokuapp.com/api/autores",
-                dataType: 'json',
-                success: function (resposta) {
-                    console.log("chegou a resposta");
-                    this.setState({lista: resposta});
-                }.bind(this)
-            }
-        );
-    }*/
+    /*    // Chamada pelo React antes dele invocar o render pela primeira vez
+        componentWillMount() {
+            console.log("willMount");
+            $.ajax({
+                    url: "http://cdc-react.herokuapp.com/api/autores",
+                    dataType: 'json',
+                    success: function (resposta) {
+                        console.log("chegou a resposta");
+                        this.setState({lista: resposta});
+                    }.bind(this)
+                }
+            );
+        }*/
 
     // Chamada depois do primeiro render
     componentDidMount() {
@@ -47,18 +48,21 @@ class App extends Component {
         console.log(evento);
 
         $.ajax({
-            url: "http://cdc-react.herokuapp.com/api/autores/",
-            contentType: 'application/json',
-            dataType: 'json',
-            type: 'post',
-            data: JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
-            success: function (resposta) {
-                console.log("Enviado com Sucesso")
-            },
-            error: function (resposta) {
-                console.log("Erro")
+                url: "http://cdc-react.herokuapp.com/api/autores/",
+                contentType: 'application/json',
+                dataType: 'json',
+                type: 'post',
+                data: JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
+                success: function (resposta) {
+                    console.log("Enviado com Sucesso")
+                    console.log(resposta);
+                    this.setState({lista: resposta})
+                }.bind(this),
+
+                error: function (resposta) {
+                    console.log("Erro")
+                }
             }
-        }
         );
     }
 
@@ -84,7 +88,6 @@ class App extends Component {
                 <div id="menu">
                     <div className="pure-menu">
                         <a className="pure-menu-heading" href="#">Company</a>
-
                         <ul className="pure-menu-list">
                             <li className="pure-menu-item"><a href="#" className="pure-menu-link">Home</a></li>
                             <li className="pure-menu-item"><a href="#" className="pure-menu-link">Autor</a></li>
