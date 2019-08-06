@@ -29,9 +29,7 @@ class FormularioAutor extends React.Component{
                 type: 'post',
                 data: JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
                 success: function (resposta) {
-                    console.log("Enviado com Sucesso");
-                    console.log(resposta);
-                    this.setState({lista: resposta})
+                    this.props.callbackAtualizaListagem(resposta);
                 }.bind(this),
 
                 error: function (resposta) {

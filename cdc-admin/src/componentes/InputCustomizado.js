@@ -9,7 +9,6 @@ class InputCustomizado extends Component{
             </div>
         );
     }
-
 }
 
 export default InputCustomizado

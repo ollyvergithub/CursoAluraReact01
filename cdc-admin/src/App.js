@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './css/pure-min.css';
 import './css/side-menu.css';
-import $ from 'jquery';
 
 // Meus Componentes
-import FormularioAutor from './componentes/FormularioAutor';
-import TabelaAutor from './componentes/TabelaAutor';
+import AutorBox from './componentes/AutorBox';
 
 class App extends Component {
 
@@ -31,10 +29,7 @@ class App extends Component {
                         <h1>Cadastro de Autores</h1>
                     </div>
                     <div className="content" id="content">
-
-                        <FormularioAutor/>
-                        <TabelaAutor/>
-
+                        <AutorBox/>
                     </div>
                 </div>
             </div>

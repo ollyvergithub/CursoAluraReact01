@@ -1,23 +1,6 @@
 import React from 'react';
-import $ from 'jquery';
 
 class TabelaAutor extends React.Component{
-    constructor() {
-        super();
-        this.state = {lista : [], nome: '', email: '', senha: ''};
-    }
-
-    // Chamada depois do primeiro render
-    componentDidMount() {
-        $.ajax({
-                url: "http://cdc-react.herokuapp.com/api/autores",
-                dataType: 'json',
-                success: function (resposta) {
-                    this.setState({lista: resposta});
-                }.bind(this)
-            }
-        );
-    }
 
     render() {
         return (
@@ -31,7 +14,7 @@ class TabelaAutor extends React.Component{
                     </thead>
                     <tbody>
                     {
-                        this.state.lista.map(function (autor) {
+                        this.props.lista.map(function (autor) {
                             return (
                                 <tr key={autor.id}>
                                     <td>{autor.nome}</td>
