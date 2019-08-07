@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import PubSub from 'pubsub-js';
 
 // Meus componentes
 import FormularioAutor from './FormularioAutor';
@@ -9,7 +10,6 @@ class AutorBox extends React.Component{
     constructor() {
         super();
         this.state = {lista : [], nome: '', email: '', senha: ''};
-        this.atualizaListagem = this.atualizaListagem.bind(this)
     }
     // Chamada depois do primeiro render
     componentDidMount() {
@@ -21,16 +21,19 @@ class AutorBox extends React.Component{
                 }.bind(this)
             }
         );
-    }
-
-    atualizaListagem(novaLista){
-        this.setState({lista: novaLista})
+        
+        PubSub.subscribe('atualiza-lista-autores', function (topico, novaListagem) {
+            console.log('PubSub ', topico);
+            console.log('PubSub ', novaListagem);
+            this.setState({lista : novaListagem})
+        }.bind(this)
+        );
     }
 
     render(){
         return (
             <div>
-                <FormularioAutor callbackAtualizaListagem={this.atualizaListagem}/>
+                <FormularioAutor/>
                 <TabelaAutores lista={this.state.lista}/>
             </div>
         );

@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import PubSub from 'pubsub-js';
 
 // Meus Componentes
 import InputCustomizado from './InputCustomizado';
@@ -25,9 +26,10 @@ class FormularioAutor extends React.Component{
                 dataType: 'json',
                 type: 'post',
                 data: JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
-                success: function (resposta) {
-                    this.props.callbackAtualizaListagem(resposta);
-                }.bind(this),
+                success: function (novaListagem) {
+                    // Dispara um aviso geral de novaListagem disponível
+                    PubSub.publish('atualiza-lista-autores', novaListagem)
+                },
 
                 error: function (resposta) {
                     console.log("Erro")
