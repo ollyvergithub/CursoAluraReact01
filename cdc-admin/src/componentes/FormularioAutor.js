@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import PubSub from 'pubsub-js';
+import TratadorErros from '../TratadorErros';
 
 // Meus Componentes
 import InputCustomizado from './InputCustomizado';
@@ -32,7 +33,12 @@ class FormularioAutor extends React.Component{
                 },
 
                 error: function (resposta) {
-                    console.log("Erro")
+                    if (resposta.status === 400){
+                        // recuperar quais os erros
+                        // exibir a mensagem de erro no campo
+                        new TratadorErros().publicaErros(resposta.responseJSON)
+                    }
+
                 }
             }
         );
