@@ -1,6 +1,6 @@
 import React from 'react';
 
-class TabelaAutor extends React.Component{
+class TabelaAutores extends React.Component{
 
     render() {
         return (
@@ -31,4 +31,4 @@ class TabelaAutor extends React.Component{
 
 }
 
-export default TabelaAutor;
+export default TabelaAutores;

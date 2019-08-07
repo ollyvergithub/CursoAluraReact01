@@ -18,9 +18,6 @@ class FormularioAutor extends React.Component{
 
     enviaForm(evento) {
         evento.preventDefault();
-        console.log("Dados sendo enviados");
-        console.log(this);
-        console.log(evento);
 
         $.ajax({
                 url: "http://cdc-react.herokuapp.com/api/autores/",

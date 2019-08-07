@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 // Meus componentes
 import FormularioAutor from './FormularioAutor';
-import TabelaAutor from './TabelaAutor';
+import TabelaAutores from './TabelaAutores';
 
 class AutorBox extends React.Component{
     constructor() {
@@ -31,7 +31,7 @@ class AutorBox extends React.Component{
         return (
             <div>
                 <FormularioAutor callbackAtualizaListagem={this.atualizaListagem}/>
-                <TabelaAutor lista={this.state.lista}/>
+                <TabelaAutores lista={this.state.lista}/>
             </div>
         );
     }
