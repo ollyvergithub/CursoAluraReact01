@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {Router, Route} from 'react-router';
+import {Router, Route, browserHistory} from 'react-router';
+import AutorBox from './componentes/AutorBox'
 
 ReactDOM.render(
     (
-        <Router>
+        <Router history={browserHistory}>
             <Route path='/' component={App}/>
-            <Route path='/autor'/>
+            <Route path='/autor' component={AutorBox}/>
             <Route path='/livro'/>
         </Router>
     ),
