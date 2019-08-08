@@ -7,12 +7,15 @@ import FormularioAutor from './FormularioAutor';
 import TabelaAutores from './TabelaAutores';
 
 class AutorBox extends React.Component{
+    _isMounted = false;
     constructor() {
         super();
         this.state = {lista : [], nome: '', email: '', senha: ''};
     }
     // Chamada depois do primeiro render
     componentDidMount() {
+        this._isMounted = true;
+
         $.ajax({
                 url: "http://cdc-react.herokuapp.com/api/autores",
                 dataType: 'json',
@@ -22,10 +25,18 @@ class AutorBox extends React.Component{
             }
         );
         
-        PubSub.subscribe('atualiza-lista-autores', function (topico, novaListagem) {
-            this.setState({lista : novaListagem})
-        }.bind(this)
-        );
+        if (this._isMounted) {
+            PubSub.subscribe('atualiza-lista-autores', function (topico, novaListagem) {
+
+                   this.setState({lista: novaListagem})
+
+            }.bind(this)
+            );
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render(){

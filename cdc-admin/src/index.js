@@ -8,8 +8,6 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
 
 // Meus Componentes
-import AutorBox from './componentes/AutorBox'
-import Home from './Home';
 
 ReactDOM.render(
     <BrowserRouter>
