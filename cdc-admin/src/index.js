@@ -3,9 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {Router, Route} from 'react-router';
 
 ReactDOM.render(
-    <App />,
+    (
+        <Router>
+            <Route path='/' component={App}/>
+            <Route path='/autor'/>
+            <Route path='/livro'/>
+        </Router>
+    ),
     document.getElementById('root')
 );
 
