@@ -2,25 +2,35 @@ import React, { Component } from 'react';
 import PubSub from 'pubsub-js';
 
 class InputCustomizado extends Component{
-
+    // TENTANDO RESOLVER - Warning: Can't perform a React state update on an unmounted component.
+    _isMounted = false;
     constructor(){
         super();
         this.state = {msgErro:''}
     }
 
     componentDidMount() {
-        PubSub.subscribe('erro-validacao', function (topico, erro) {
+        // TENTANDO RESOLVER - Warning: Can't perform a React state update on an unmounted component.
+        this._isMounted = true;
 
-                if (erro.field === this.props.name) {
-                    this.setState({msgErro: erro.defaultMessage})
-                }
-            }.bind(this),
-        );
+        // TENTANDO RESOLVER - Warning: Can't perform a React state update on an unmounted component.
+        if (this._isMounted) {
+            PubSub.subscribe('erro-validacao', function (topico, erro) {
+                    if (erro.field === this.props.name) {
+                        this.setState({msgErro: erro.defaultMessage})
+                    }
+                }.bind(this),
+            );
 
-        PubSub.subscribe('limpa-erros', function (topico) {
-           this.setState({msgErro: ''} );
-        }.bind(this)
-        );
+            PubSub.subscribe('limpa-erros', function (topico) {
+                    this.setState({msgErro: ''});
+                }.bind(this)
+            );
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {
