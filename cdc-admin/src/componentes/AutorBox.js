@@ -7,6 +7,7 @@ import FormularioAutor from './FormularioAutor';
 import TabelaAutores from './TabelaAutores';
 
 class AutorBox extends React.Component{
+    // TENTANDO RESOLVER - Warning: Can't perform a React state update on an unmounted component.
     _isMounted = false;
     constructor() {
         super();
@@ -24,18 +25,18 @@ class AutorBox extends React.Component{
                 }.bind(this)
             }
         );
-        
+
+        // TENTANDO RESOLVER - Warning: Can't perform a React state update on an unmounted component.
         if (this._isMounted) {
             PubSub.subscribe('atualiza-lista-autores', function (topico, novaListagem) {
-
-                   this.setState({lista: novaListagem})
-
+               this.setState({lista: novaListagem})
             }.bind(this)
             );
         }
     }
 
     componentWillUnmount() {
+        //TENTANDO RESOLVER - Warning: Can't perform a React state update on an unmounted component.
         this._isMounted = false;
     }
 
