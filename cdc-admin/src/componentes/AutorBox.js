@@ -23,8 +23,6 @@ class AutorBox extends React.Component{
         );
         
         PubSub.subscribe('atualiza-lista-autores', function (topico, novaListagem) {
-            console.log('PubSub topico | ', topico);
-            console.log('PubSub novaListagem | ', novaListagem);
             this.setState({lista : novaListagem})
         }.bind(this)
         );

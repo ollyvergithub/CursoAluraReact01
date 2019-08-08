@@ -29,8 +29,9 @@ class FormularioAutor extends React.Component{
                 data: JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
                 success: function (novaListagem) {
                     // Dispara um aviso geral de novaListagem disponível
-                    PubSub.publish('atualiza-lista-autores', novaListagem)
-                },
+                    PubSub.publish('atualiza-lista-autores', novaListagem);
+                    this.setState({nome: '', email: '', senha: ''});
+                }.bind(this),
 
                 error: function (resposta) {
                     if (resposta.status === 400){
@@ -38,7 +39,9 @@ class FormularioAutor extends React.Component{
                         // exibir a mensagem de erro no campo
                         new TratadorErros().publicaErros(resposta.responseJSON)
                     }
-
+                },
+                beforeSend: function () {
+                    PubSub.publish("limpa-erros", {})
                 }
             }
         );
@@ -63,7 +66,7 @@ class FormularioAutor extends React.Component{
 
                     <InputCustomizado id ='nome' type='text' name='nome' value={this.state.nome} onChange={this.setNome} label="Nome"/>
                     <InputCustomizado id ='email' type='email' name='email' value={this.state.email} onChange={this.setEmail} label="Email"/>
-                    <InputCustomizado id ='senha' type='password' name='email' value={this.state.senha} onChange={this.setSenha} label="Senha"/>
+                    <InputCustomizado id ='senha' type='password' name='senha' value={this.state.senha} onChange={this.setSenha} label="Senha"/>
 
                     <InputCustomizadoBotao type="submit" texto="Gravar"/>
                 </form>

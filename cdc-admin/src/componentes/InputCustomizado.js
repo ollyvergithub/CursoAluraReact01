@@ -5,12 +5,20 @@ class InputCustomizado extends Component{
 
     constructor(){
         super();
-        this.state = {msgErro:'', campo: ''}
+        this.state = {msgErro:''}
     }
 
     componentDidMount() {
         PubSub.subscribe('erro-validacao', function (topico, erro) {
-            this.setState({msgErro: erro.defaultMessage})
+
+                if (erro.field === this.props.name) {
+                    this.setState({msgErro: erro.defaultMessage})
+                }
+            }.bind(this),
+        );
+
+        PubSub.subscribe('limpa-erros', function (topico) {
+           this.setState({msgErro: ''} );
         }.bind(this)
         );
     }
