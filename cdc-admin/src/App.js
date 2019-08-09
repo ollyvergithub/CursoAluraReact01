@@ -8,8 +8,8 @@ import {Switch, Route} from "react-router-dom";
 import MenuSuperior from './componentes/MenuSuperior';
 import AutorBox from './componentes/AutorBox';
 import Home from './Home';
-import FormularioLivro from './componentes/FormularioLivro';
 import Footer from './componentes/Footer';
+import LivroBox from "./componentes/LivroBox";
 
 class App extends Component {
 
@@ -20,8 +20,8 @@ class App extends Component {
                 <div id="main">
                     <Switch>
                         <Route path="/" exact component={Home} />
-                        <Route path="/autor" exact component={AutorBox} />
-                        <Route path="/livro" exact component={FormularioLivro}/>
+                        <Route path="/autor" component={AutorBox} />
+                        <Route path="/livro" component={LivroBox}/>
                     </Switch>
                 </div>
                 <Footer/>

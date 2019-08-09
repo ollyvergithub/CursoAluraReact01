@@ -1,8 +1,10 @@
 import React from 'react';
 
-class TabelaLivro extends React.Component{
+class TabelaLivros extends React.Component {
+
     render() {
         return (
+
             <table className="pure-table">
                 <thead>
                 <tr>
@@ -14,9 +16,9 @@ class TabelaLivro extends React.Component{
                 <tbody>
 
                 {
-                    this.state.lista_livros.length > 0 ? (
+                    this.props.lista_livros.length > 0 ? (
 
-                        this.state.lista_livros.map(function (livro) {
+                        this.props.lista_livros.map(function (livro) {
                             return (
                                 <tr key={livro.id}>
                                     <td>{livro.titulo}</td>
@@ -37,10 +39,8 @@ class TabelaLivro extends React.Component{
 
                 </tbody>
             </table>
-
         );
     }
-
 }
 
-export default TabelaLivro
+export default TabelaLivros
