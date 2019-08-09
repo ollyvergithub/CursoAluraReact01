@@ -65,13 +65,21 @@ class FormularioLivro extends React.Component{
                 type: 'post',
                 data: JSON.stringify({autorId: this.state.autorId, titulo: this.state.titulo, preco: this.state.preco, autor:this.state.autor}),
                 success: function (novaListagem) {
-
                     PubSub.publish('atualiza-lista-livros', novaListagem);
+                    this.setState({titulo: '', preco: '', autorId: '', autor: ''});
 
                 }.bind(this),
+
                 error: function (resposta) {
-                   console.log('Erro Envio Livro')
+                    if (resposta.status === 400){
+                        // recuperar quais os erros
+                        // exibir a mensagem de erro no campo
+                        new TratadorErros().publicaErros(resposta.responseJSON)
+                    }
                 },
+                beforeSend: function () {
+                    PubSub.publish("limpa-erros", {})
+                }
             }
         );
 
@@ -85,9 +93,9 @@ class FormularioLivro extends React.Component{
 
                 {
                     this.state.lista_autores.length > 0 ? (
-                        <div className="pure-form pure-form-aligned">
+                        <div className="pure-control-group">
                             <label htmlFor='AutorId'>Escolha o Autor</label>
-                            <select value={ this.state.id } id="AutorId" name="AutorId" onChange={ this.setAutorId }>
+                            <select value={ this.state.autorId } id="AutorId" name="AutorId" onChange={ this.setAutorId }>
                                 <option value="">Selecione</option>
                                 {
                                     this.state.lista_autores.map(function(autor, index) {

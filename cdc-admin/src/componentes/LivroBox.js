@@ -9,7 +9,7 @@ class LivroBox extends React.Component{
 
     constructor(){
         super();
-        this.state = {lista_livros: [], lista_autores: [], titulo: '', preco: '', autorId: '', autor: ''};
+        this.state = {lista_livros: []};
     }
 
     componentDidMount() {
@@ -17,13 +17,10 @@ class LivroBox extends React.Component{
                 url: API_LIVROS,
                 dataType: 'json',
                 success: function (resposta) {
-                    console.log("Sucesso Primeiro Ajax Livros");
-                    console.log(resposta);
                     this.setState({lista_livros: resposta});
                 }.bind(this),
                 error: function () {
                     console.log("ERRO Primeiro Ajax Livros");
-
                 }
             }
         );
