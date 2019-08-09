@@ -6,8 +6,12 @@ import TratadorErros from '../TratadorErros';
 // Meus Componentes
 import InputCustomizado from './InputCustomizado';
 import InputCustomizadoBotao from './InputCustomizadoBotao';
+const API_AUTORES = process.env.REACT_APP_API_AUTORES;
 
 class FormularioAutor extends React.Component{
+    // TENTANDO RESOLVER - Warning: Can't perform a React state update on an unmounted component.
+    _isMounted = false;
+
     constructor() {
         super();
         this.state = {lista : [], nome: '', email: '', senha: ''};
@@ -18,11 +22,17 @@ class FormularioAutor extends React.Component{
         this.setSenha = this.setSenha.bind(this);
     }
 
+    componentWillUnmount() {
+        //TENTANDO RESOLVER - Warning: Can't perform a React state update on an unmounted component.
+        this._isMounted = false;
+    }
+
     enviaForm(evento) {
+        this._isMounted = true;
         evento.preventDefault();
 
         $.ajax({
-                url: "http://cdc-react.herokuapp.com/api/autores/",
+                url: API_AUTORES,
                 contentType: 'application/json',
                 dataType: 'json',
                 type: 'post',

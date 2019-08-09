@@ -5,10 +5,13 @@ import PubSub from 'pubsub-js';
 // Meus componentes
 import FormularioAutor from './FormularioAutor';
 import TabelaAutores from './TabelaAutores';
+const API_AUTORES = process.env.REACT_APP_API_AUTORES;
 
 class AutorBox extends React.Component{
+
     // TENTANDO RESOLVER - Warning: Can't perform a React state update on an unmounted component.
     _isMounted = false;
+
     constructor() {
         super();
         this.state = {lista : [], nome: '', email: '', senha: ''};
@@ -18,7 +21,7 @@ class AutorBox extends React.Component{
         this._isMounted = true;
 
         $.ajax({
-                url: "http://cdc-react.herokuapp.com/api/autores",
+                url: API_AUTORES,
                 dataType: 'json',
                 success: function (resposta) {
                     this.setState({lista: resposta});
